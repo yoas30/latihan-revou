@@ -1,0 +1,18 @@
+
+body{
+    margin: 5%;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.container {
+    display: flex;
+    justify-content: center; /* Mengatur agar isi flexbox berada di tengah */
+}
+
+.alignborder {
+    text-align: center;
+}
+
+#footer{
+    text-align: center;
+}

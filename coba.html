@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contoh DOM HTML</title>
+</head>
+<body>
+    <h1 id="judul">Judul Halaman</h1>
+    <p>Ini adalah contoh halaman web.</p>
+    
+    <footer>
+        <a href="index.html">kembali</a>
+    </footer>
+
+    <script>
+        // Mengambil elemen berdasarkan id
+        var judulElemen = document.getElementById("judul");
+
+        // Mengubah teks judul
+        judulElemen.innerHTML = "Judul Baru";
+
+        // Membuat elemen baru dan menambahkannya ke dalam body
+        var paragrafBaru = document.createElement("a");
+        paragrafBaru.innerHTML = "Ini adalah paragraf baru.";
+        document.body.appendChild(paragrafBaru);
+    </script>
+</body>
+</html>

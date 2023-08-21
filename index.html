@@ -2,22 +2,24 @@
 <html>
     <head>
         <title>Websiteku</title>
+        <link rel="stylesheet" type="text/css" href="css/tampilan.css">
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">"
     </head>
-    <style>
-        .container {
-            display: flex;
-            justify-content: center; /* Mengatur agar isi flexbox berada di tengah */
-        }
-        .alignborder {
-            text-align: center;
-        }
-    </style>
     <body>
+        <div id="app">
+        <header>
+            <img src="img/logo.png" width="150">
+            <h1>{{ getname().toUpperCase() }}</h1>
+            <h2>{{ isActive ? 'success' : 'danger' }}</h2>
+            <p>The Progresive Javascript Framework</p>
+            <a link href="coba.html">coba</a>
+        </header>
+        </div>
         <h1 class="alignborder">SAYA YOAS</h1>
         <div class="container">
             <table border="1" style="width: 50%; height: 50px;">
                 <thead>
-                    <tr >
+                    <tr style="height: 40px;">
                         <th>No</th>
                         <th>Nama</th>
                         <th>Umur</th>
@@ -34,8 +36,35 @@
                         <td>Jane Smith</td>
                         <td>22</td>
                     </tr>
+                    <tr class="alignborder">
+                        <td>3</td>
+                        <td>Gara</td>
+                        <td>26</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
+        <footer id="footer">
+            <p>copyright 2023</p>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+        <script> 
+        const member ={
+                    //string, number, boolean, array, object
+                    name:'Doremi Fasilasido',
+                    pesan: "Hello World!",
+                    isActive: true
+                }
+
+        const vm = new Vue({
+                el: '#app',
+                data: member,
+                methods: {
+                    getname: function(){
+                        return 'Hello, ' +this.name
+                    }
+                }
+            })
+        </script>
     </body>
 </html>
