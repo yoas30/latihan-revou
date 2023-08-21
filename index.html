@@ -3,7 +3,39 @@
     <head>
         <title>Websiteku</title>
     </head>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center; /* Mengatur agar isi flexbox berada di tengah */
+        }
+        .alignborder {
+            text-align: center;
+        }
+    </style>
     <body>
-        <h1 style="text-align: center;">SAYA YOAS</h1>
+        <h1 class="alignborder">SAYA YOAS</h1>
+        <div class="container">
+            <table border="1" style="width: 50%; height: 50px;">
+                <thead>
+                    <tr >
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Umur</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="alignborder">
+                        <td>1</td>
+                        <td>John Doe</td>
+                        <td>20</td>
+                    </tr>
+                    <tr class="alignborder">
+                        <td>2</td>
+                        <td>Jane Smith</td>
+                        <td>22</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </body>
 </html>
