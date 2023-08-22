@@ -2,17 +2,33 @@
 <html>
     <head>
         <title>Websiteku</title>
+        <link rel="icon" href="img/favicon.png" type="image/x-icon">
         <link rel="stylesheet" type="text/css" href="css/tampilan.css">
         <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">"
     </head>
     <body>
-        <div id="app">
+         <div id="app"> <!--Pemanggilan Element (el) di VueJs -->
         <header>
-            <img src="img/logo.png" width="150">
-            <h1>{{ getname().toUpperCase() }}</h1>
+        <!-- Render Gambar -->
+            <img v-bind:src="gambar" width="150">
+        <!-- Render Nama -->
+            <h1 v-once>{{ getname().toUpperCase() }}</h1>
+        <!-- Render Anotasi Bilangan -->
+            <h1 v-text="bilangan*5"></h1>
+            <p>
+                <h4>Bilangan ini adalah bilangan {{ infoBilangan }}</h4>
+                <button class="myButton" v-on:click="handleclick">{{ tekan.toUpperCase() }}</button>
+            </p>
+        <!-- Render Link -->
+            <h1 v-html="link"></h1>
+
+        <!-- Pemanggilan Vue Js     -->
             <h2>{{ isActive ? 'success' : 'danger' }}</h2>
+            <h3>{{ getname() }}</h3>
+            <h3>{{ namaLengkap+ " " +totalBayar}}</h3>
+            <h3>{{ bilangan }}</h3>
+            <h4>Bilangan ini adalah bilangan {{ infoBilangan }}</h4>
             <p>The Progresive Javascript Framework</p>
-            <a link href="coba.html">coba</a>
         </header>
         </div>
         <h1 class="alignborder">SAYA YOAS</h1>
@@ -47,23 +63,53 @@
         <footer id="footer">
             <p>copyright 2023</p>
         </footer>
-        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+        <!-- cdn vue js versi 2.6.0 -->
+        <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script> -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <script> 
         const member ={
                     //string, number, boolean, array, object
                     name:'Doremi Fasilasido',
                     pesan: "Hello World!",
-                    isActive: true
+                    isActive: true,
+                    qty: 1,
+                    namaDepan:'Yoas ',
+                    namaBelakang:'Albert Rinatan',
+                    bilangan: 6,
+                    link:'<a href="home/coba.html">coba</a>',
+                    gambar: 'img/logo.png',
+                    tekan: 'ditekan'
                 }
 
         const vm = new Vue({
                 el: '#app',
                 data: member,
-                methods: {
-                    getname: function(){
-                        return 'Hello, ' +this.name
+                methods: 
+                    {
+                        getname:function(){
+                            return 'Hello, ' +this.name
+                        },
+                        ubahNama:function(namaBaru){
+                            this.name = namaBaru
+                            return this.getname()
+                        },
+                        handleclick:function(){
+                            this.bilangan++
+                            this.gambar ='img/img.jpg'
+                        }
+                    },
+                computed: 
+                    {
+                        totalBayar: function(){
+                            return this.qty*10000
+                        },
+                        namaLengkap: function(){
+                            return this.namaDepan + this.namaBelakang
+                        },
+                        infoBilangan:function(){
+                            return this.bilangan%2 === 0 ? 'Genap' : 'Ganjil' 
+                        }
                     }
-                }
             })
         </script>
     </body>
