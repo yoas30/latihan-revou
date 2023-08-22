@@ -22,3 +22,9 @@ body{
     width: 150px; /* Ubah lebar tombol */
     height: 30px; /* Ubah tinggi tombol */
 }
+
+.active{
+    background: salmon;
+    border: 0;
+    padding: 5px;
+}

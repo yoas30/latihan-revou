@@ -11,8 +11,37 @@
         <header>
         <!-- Render Gambar -->
             <img v-bind:src="gambar" width="150">
-        <!-- Render Nama -->
+        <!-- Render Nama ada 2 cara-->
             <h1 v-once>{{ getname().toUpperCase() }}</h1>
+            <h1 v-text="name"></h1>
+        <!-- Render inputText dan ditampilkan -->
+            <p>
+                <h1 v-text="name"></h1>
+                <input type="text" v-model="name">
+            </p>
+        <!-- Render checkbox dan dan melakukan perulangan serta ditampilkan ada 2 cara-->
+            <ul>
+                <li v-for="item of kelas" v-text="item"></li>
+                <br>
+                <li v-for="(item , index) of kelas" >{{ index+1 }} - {{ item }}</li>
+            </ul>
+            <p>            
+                <div>
+                    <label><input type="checkbox" value="React" v-model="kelas">React</label>
+                    <label><input type="checkbox" value="VueJs" v-model="kelas">VueJs</label>
+                    <label><input type="checkbox" value="Angular" v-model="kelas">Angular</label>
+                </div>
+            </p>
+        <!-- Perulangan data -->
+            <h3>Perulangan (1-5)</h3>
+            <ul>
+                <li v-for="x in 5">{{ x }}</li>
+            </ul>
+        <!-- Perulangan data dan mencari bilangan Genap -->
+            <h3>Mencari Bilangan Genap: {{ numbers }}</h3>
+            <ul>
+                <li v-for="x in caribilangangenap(numbers)">{{ x }}</li>
+            </ul>
         <!-- Render Anotasi Bilangan -->
             <h1 v-text="bilangan*5"></h1>
             <p>
@@ -21,7 +50,12 @@
             </p>
         <!-- Render Link -->
             <h1 v-html="link"></h1>
-
+        <!-- Hapus class di VueJs dengan True/False -->
+            <p>
+                <button v-bind:class="{active:menu === 'home'}" v-on:click=" menu = 'home' ">Home</button>
+                <button v-bind:class="{active:menu === 'about'}" v-on:click=" menu = 'about' ">About</button>
+                <button v-bind:class="{active:menu === 'blog'}" v-on:click=" menu = 'blog' ">Blog</button>
+            </p>
         <!-- Pemanggilan Vue Js     -->
             <h2>{{ isActive ? 'success' : 'danger' }}</h2>
             <h3>{{ getname() }}</h3>
@@ -29,6 +63,7 @@
             <h3>{{ bilangan }}</h3>
             <h4>Bilangan ini adalah bilangan {{ infoBilangan }}</h4>
             <p>The Progresive Javascript Framework</p>
+
         </header>
         </div>
         <h1 class="alignborder">SAYA YOAS</h1>
@@ -78,7 +113,10 @@
                     bilangan: 6,
                     link:'<a href="home/coba.html">coba</a>',
                     gambar: 'img/logo.png',
-                    tekan: 'ditekan'
+                    tekan: 'ditekan',
+                    menu:'home',
+                    kelas:['Golang','PHP','Python'],
+                    numbers:[ 1, 2, 3, 4, 5]
                 }
 
         const vm = new Vue({
@@ -96,6 +134,11 @@
                         handleclick:function(){
                             this.bilangan++
                             this.gambar ='img/img.jpg'
+                        },
+                        caribilangangenap:(data) => { //javascript modern function bisa diganti dengan arrow (=>)
+                            return data.filter(angka => {
+                                return angka % 2 == 0
+                            })
                         }
                     },
                 computed: 
