@@ -11,20 +11,59 @@
         <header>
         <!-- Render Gambar -->
             <img v-bind:src="gambar" width="150">
-        <!-- Render Nama ada 2 cara-->
+        <!-- Masukkan data dan bisa di ENTER (di keyboard) -->
+            <h1>FORM SUBMIT</h1>
+            <p><input type="text" placeholder="Nama Kelas" v-on:keyup.enter="submit"></p>
+            <h1>FORM SUBMIT 2</h1>
+            <p><input type="text" placeholder="Nama Kelas" v-on:keyup.enter="submit2" vmodel="kelasbaru"></p>
+                
+            <!-- Render Nama ada 2 cara-->
             <h1 v-once>{{ getname().toUpperCase() }}</h1>
             <h1 v-text="name"></h1>
-        <!-- Render inputText dan ditampilkan -->
+        <!-- Render inputText dan ditampilkan --> 
             <p>
                 <h1 v-text="name"></h1>
                 <input type="text" v-model="name">
             </p>
+        <!-- Render if else VueJs --> 
+        <div>
+            <p>
+                <h3>Daftar Kelas ({{ kelas.length }})</h3>
+                <ul v-if="kelas.length >= 1">
+                    <li v-for="item of kelas" v-text="item"></li>
+                    <br>
+                    <li v-for="(item , index) of kelas" >{{ index+1 }} - {{ item }}</li>
+                    <li style="font-weight: bolder;">Kelas Tersedia</li>
+                </ul>
+                <li style="font-weight: bolder;" v-else>Kelas Belum Tersedia</li>
+            </p>
+        </div>    
+        <div>
+            <p>
+                <h3>Daftar Kelas ({{ kelas.length }})</h3>
+                <ul v-show="kelas.length >= 1">
+                    <li v-for="item of kelas" v-text="item"></li>
+                    <br>
+                    <li v-for="(item , index) of kelas" >{{ index+1 }} - {{ item }}</li>
+                    <li style="font-weight: bolder;">Kelas Tersedia</li>
+                </ul>
+            </p>
+        </div>
         <!-- Render checkbox dan dan melakukan perulangan serta ditampilkan ada 2 cara-->
             <ul>
                 <li v-for="item of kelas" v-text="item"></li>
                 <br>
                 <li v-for="(item , index) of kelas" >{{ index+1 }} - {{ item }}</li>
             </ul>
+        <template>
+            <h2>Daftar Kelas ({{ kelas.length }})</h2>
+                <ul v-if="kelas.length >= 1">
+                    <li v-for="item of kelas" v-text="item"></li>
+                    <br>
+                    <li v-for="(item , index) of kelas" >{{ index+1 }} - {{ item }}</li>
+                    <li style="font-weight: bolder;">Kelas Tersedia</li>
+                </ul>
+        </template>
             <p>            
                 <div>
                     <label><input type="checkbox" value="React" v-model="kelas">React</label>
@@ -50,12 +89,14 @@
             </p>
         <!-- Render Link -->
             <h1 v-html="link"></h1>
+
         <!-- Hapus class di VueJs dengan True/False -->
-            <p>
+            <!-- <p>
                 <button v-bind:class="{active:menu === 'home'}" v-on:click=" menu = 'home' ">Home</button>
                 <button v-bind:class="{active:menu === 'about'}" v-on:click=" menu = 'about' ">About</button>
                 <button v-bind:class="{active:menu === 'blog'}" v-on:click=" menu = 'blog' ">Blog</button>
-            </p>
+            </p> -->
+
         <!-- Pemanggilan Vue Js     -->
             <h2>{{ isActive ? 'success' : 'danger' }}</h2>
             <h3>{{ getname() }}</h3>
@@ -63,6 +104,10 @@
             <h3>{{ bilangan }}</h3>
             <h4>Bilangan ini adalah bilangan {{ infoBilangan }}</h4>
             <p>The Progresive Javascript Framework</p>
+
+            <a v-bind:class="{active: menu === 'home'}" href="#" v-on:click.prevent="gantimenu('home')">Home</a>
+            <a v-bind:class="{active: menu === 'about'}" href="#" v-on:click.prevent="gantimenu('about')">About</a>
+            <a v-bind:class="{active: menu === 'blog'}" href="#" v-on:click.prevent="gantimenu('blog')">Blog</a>
 
         </header>
         </div>
@@ -100,60 +145,7 @@
         </footer>
         <!-- cdn vue js versi 2.6.0 -->
         <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script> -->
-        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-        <script> 
-        const member ={
-                    //string, number, boolean, array, object
-                    name:'Doremi Fasilasido',
-                    pesan: "Hello World!",
-                    isActive: true,
-                    qty: 1,
-                    namaDepan:'Yoas ',
-                    namaBelakang:'Albert Rinatan',
-                    bilangan: 6,
-                    link:'<a href="home/coba.html">coba</a>',
-                    gambar: 'img/logo.png',
-                    tekan: 'ditekan',
-                    menu:'home',
-                    kelas:['Golang','PHP','Python'],
-                    numbers:[ 1, 2, 3, 4, 5]
-                }
-
-        const vm = new Vue({
-                el: '#app',
-                data: member,
-                methods: 
-                    {
-                        getname:function(){
-                            return 'Hello, ' +this.name
-                        },
-                        ubahNama:function(namaBaru){
-                            this.name = namaBaru
-                            return this.getname()
-                        },
-                        handleclick:function(){
-                            this.bilangan++
-                            this.gambar ='img/img.jpg'
-                        },
-                        caribilangangenap:(data) => { //javascript modern function bisa diganti dengan arrow (=>)
-                            return data.filter(angka => {
-                                return angka % 2 == 0
-                            })
-                        }
-                    },
-                computed: 
-                    {
-                        totalBayar: function(){
-                            return this.qty*10000
-                        },
-                        namaLengkap: function(){
-                            return this.namaDepan + this.namaBelakang
-                        },
-                        infoBilangan:function(){
-                            return this.bilangan%2 === 0 ? 'Genap' : 'Ganjil' 
-                        }
-                    }
-            })
-        </script>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>    
+        <script src="js/vuejs.js"></script>  
     </body>
 </html>
